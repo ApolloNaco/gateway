@@ -5,12 +5,18 @@ spring:
     name: gateway
   cloud:
     nacos:
-      server-addr: localhost:8848
+      discovery:
+        server-addr: localhost:8848
     gateway:
       discovery:
         locator:
           # 让gateway通过服务发现组件找到其他的微服务
           enabled: true
+      routes:
+        - id: after_route
+          uri: lb://my-user-center
+          predicates:
+            - TimeBetween=上午9:00,下午11:00
 management:
   endpoints:
     web:
@@ -19,3 +25,6 @@ management:
   endpoint:
     health:
       show-details: always
+logging:
+  level:
+    org.springframework.cloud.gateway: trace
