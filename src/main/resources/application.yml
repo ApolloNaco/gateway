@@ -19,7 +19,7 @@ spring:
             - TimeBetween=上午0:00,下午11:59
           filters:
             - AddRequestHeader=X-Request-Foo, Bar
-
+            - ValidateCode=a,b
 management:
   endpoints:
     web:
